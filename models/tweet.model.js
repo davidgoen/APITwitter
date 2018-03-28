@@ -12,7 +12,11 @@ const tweetmodel = mongoose.model('tweet', {
   }
   
   function getTweetId(idtweet){
-    return tweetmodel.find({t_id: idtweet})
+    return tweetmodel.findOne({t_id: idtweet})
+  }
+
+  function getTweetIdUser(idtweet){
+    return tweetmodel.findOne({user_id: idtweet})
   }
   
   function getRt(iduser){
@@ -38,4 +42,5 @@ const tweetmodel = mongoose.model('tweet', {
     getRt,
     getTweet,
     getTweetText,
+    getTweetIdUser,
   };

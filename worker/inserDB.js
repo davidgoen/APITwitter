@@ -18,6 +18,11 @@ const tweetmodel = mongoose.model('tweet', {
     entities: {},
 });
 
+const tweetRT = mongoose.model('tweetRT', {
+    id_tweet: Number,
+    id_user: Number,
+});
+
 const client = new Twitter({
 
     consumer_key: "wE1rUBP62LAw0fmz7kCJfkKSS",
@@ -33,8 +38,15 @@ const client = new Twitter({
 client.stream('statuses/filter', { track: 'hola', language: 'es' }, function (stream) {
 
     stream.on('data', function (tweet) {
-        usermodel({ t_id: tweet.user.id, screen_name: tweet.user.screen_name, name: tweet.user.name }).save();
-        tweetmodel({ created_at: tweet.created_at, t_id: tweet.id, text: tweet.text, user_id: tweet.user.id }).save();
+        //usermodel({ t_id: tweet.user.id, screen_name: tweet.user.screen_name, name: tweet.user.name }).save();
+        //tweetmodel({ created_at: tweet.created_at, t_id: tweet.id, text: tweet.text, user_id: tweet.user.id }).save();
+        if(tweet.retweeted_status!=undefined){
+            console.log('STATUS')
+            console.log(tweet.retweeted_status);
+            //console.log(tweet.user.id+' '+tweet.retweeted_status.user.id);
+            //tweetRT({ id_tweet_creado: tweet.user.id, id_user: tweet.retweeted_status.user.id}).save();
+
+        }
     });
 
     stream.on('error', function (error) {

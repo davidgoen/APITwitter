@@ -15,7 +15,7 @@ function getUserId(iduser) {
 }
 
 function gettweet(id){
-  return tweetModel.getTweetid(id);
+  return tweetModel.getTweetIdUser(id);
 }
 
 module.exports = {
